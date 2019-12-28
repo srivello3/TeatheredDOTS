@@ -5,13 +5,20 @@ using Unity.Physics;
 using Unity.Physics.Extensions;
 using Unity.Transforms;
 
+[UpdateAfter(typeof(InputSystem))]
+[UpdateAfter(typeof(TimeSystem))]
 [AlwaysSynchronizeSystem]
-public class MoveSystem : JobComponentSystem
+public class MoveSystem : BasePauseableSystem
 {
 	protected override JobHandle OnUpdate(JobHandle inputDeps)
 	{
-		float deltaTime = Time.DeltaTime;
-
+		if (IsPaused())
+		{
+			return default;
+		}
+		
+		float deltaTime = EntityManager.World.Time.DeltaTime;
+ 
 		//Move non-teathered
 		Entities
 			.WithNone<IsTeatheredTagData>()
