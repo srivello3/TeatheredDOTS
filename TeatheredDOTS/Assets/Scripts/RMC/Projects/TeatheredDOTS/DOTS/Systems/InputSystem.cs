@@ -13,11 +13,11 @@ public class InputSystem : BasePauseableSystem
 		
 		if (!IsPaused())
 		{
-			axisHorizontal = Input.GetAxis("Horizontal");
-			axisVertical = Input.GetAxis("Vertical");
+			axisHorizontal = InputManager.Instance.Move.x;
+			axisVertical = InputManager.Instance.Move.y;
 		}
-		
-		bool isGetKeyDownSpacebar = Input.GetKeyDown(KeyCode.Space);
+
+		bool isGetKeyDownSpacebar = InputManager.Instance.IsPause;
 		
 		Entities.ForEach((ref InputData inputData) =>
 		{
