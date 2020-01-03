@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace RMC.Input
+namespace RMC.Projects.TeatheredDOTS.Traditional.Input
 {
     public class @CharacterInputAction : IInputActionCollection, IDisposable
     {
