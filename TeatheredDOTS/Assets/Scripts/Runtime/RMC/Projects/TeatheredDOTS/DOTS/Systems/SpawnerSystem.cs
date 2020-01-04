@@ -34,14 +34,15 @@ namespace RMC.Projects.TeatheredDOTS.DOTS.Systems
 						Value = spawnData.Position
 					};
 					
-					PhysicsVelocity velocity = new PhysicsVelocity()
+					BobData bobData = new BobData()
 					{
-						Linear = spawnData.Velocity,
-						Angular = float3.zero
+						PositionOriginal = spawnData.Position,
+						Speed = new float3 (1,1,1),
+						Amplitude = new float3 (0.25f, 0.25f, 0.25f)
 					};
 
 					EntityManager.AddComponentData(spawnInstanceEntity, translation);
-					EntityManager.AddComponentData(spawnInstanceEntity, velocity);
+					EntityManager.AddComponentData(spawnInstanceEntity, bobData);
 					
 					_entityCommandBuffer.DestroyEntity(spawnEntity);
 					
