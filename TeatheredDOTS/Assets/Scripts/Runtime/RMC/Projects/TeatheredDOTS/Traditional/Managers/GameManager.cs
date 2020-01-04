@@ -16,12 +16,13 @@ namespace RMC.Projects.TeatheredDOTS.Traditional.Input
 
         private EntityManager _entityManager;
         private BlobAssetStore _blobAssetStore;
-
+        private Entity _prefabEntity;
+        
         protected void Start()
         {
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             _blobAssetStore = new BlobAssetStore();
-            
+
             SpawnOne();
             StartCoroutine(SpawnOneCoroutine());
         }
@@ -39,18 +40,18 @@ namespace RMC.Projects.TeatheredDOTS.Traditional.Input
         {
             Debug.Log("SpawnOne()");
 
-            Entity _prefabEntity = SpawnExtensions.CreateEntityFromPrefab(_prefabGameObject, _blobAssetStore);
-            Entity spawnEnity = _entityManager.CreateEntity();
+            _prefabEntity = SpawnExtensions.CreateEntityFromPrefab(_prefabGameObject, 
+                _blobAssetStore);
+            
             SpawnData spawnData = new SpawnData
             {
                 PrefabEntity = _prefabEntity,
                 Position = new float3(1, 1, 0),
                 Velocity = new float3(0.1f, 0.1f, 0),
             };
-            _entityManager.AddComponentData(spawnEnity, spawnData);
             
+            _entityManager.AddComponentData(_entityManager.CreateEntity(), 
+                spawnData);
         }
-
-
     }
 }
